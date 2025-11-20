@@ -10,4 +10,6 @@ function isEven(n) {
   return n % 2 === 0;
 }
 
+console.log("Hello CI");
+
 module.exports = { sum, subtract, isEven };
