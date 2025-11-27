@@ -24,6 +24,7 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-cd-demo:latest
+          platforms: linux/arm64
           # למשל: galgdev/devops-cd-demo:latest
 
   deploy:
