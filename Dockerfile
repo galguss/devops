@@ -1,5 +1,5 @@
 # בסיס – Node קליל
-FROM node:20-alpine
+FROM node:20-bullseye
 
 # תקיית העבודה בתוך הקונטיינר
 WORKDIR /app
