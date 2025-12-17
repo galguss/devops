@@ -30,7 +30,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/devops-cd-demo:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-cd-demo:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/devops-cd-demo:${{ github.sha }}
           platforms: linux/arm64
           # למשל: galgdev/devops-cd-demo:latest
 
