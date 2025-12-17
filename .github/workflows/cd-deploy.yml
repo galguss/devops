@@ -43,12 +43,22 @@ jobs:
     steps:
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
+          envs: DOCKERHUB_USERNAME,DOCKERHUB_TOKEN
           script: |
+            set -e
             cd /home/ubuntu/app-for-CD
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/devops-cd-demo:latest
-            docker compose down
-            docker compose up -d
+
+            # Login to DockerHub (required for PRIVATE repos)
+            echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+            echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME" > .env
+            echo "IMAGE_TAG=${{ github.sha }}" >> .env
+            docker pull
+            docker compose up -d --force-recreate
