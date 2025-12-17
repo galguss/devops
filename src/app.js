@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send("Hello from CD with GitHub Actions! 🚀");
+  res.send("Hello from CD with GitHub Actions! for image private!🚀");
 });
 
 app.get("/health", (req, res) => {
